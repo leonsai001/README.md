@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chipi World</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #87CEEB; /* Sky Blue Background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        /* Chipi Cute Animation */
+        .chipi-img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            animation: bounce 1.5s infinite ease-in-out alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0) rotate(-5deg); }
+            100% { transform: translateY(-15deg) rotate(5deg); }
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .btn-no {
+            background-color: #007bff; /* Blue Button */
+        }
+
+        .btn-yes {
+            background-color: #28a745; /* Green Button */
+        }
+
+        .btn:hover {
+            transform: scale(1.08);
+        }
+
+        /* Hidden Utility Class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Countdown Style */
+        .countdown {
+            font-size: 60px;
+            font-weight: bold;
+            color: white;
+            animation: pulse 1s infinite;
+        }
+
+        /* Impossible Text Style */
+        .impossible-text {
+            font-size: 32px;
+            font-weight: 900;
+            color: #ff3366;
+            animation: shake 0.5s infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            40% { transform: translate(1px, -1px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        /* Poop Animation */
+        .poop {
+            font-size: 50px;
+            display: inline-block;
+            animation: growAndExplode 2.5s forwards ease-in;
+        }
+
+        @keyframes growAndExplode {
+            0% { transform: scale(1); opacity: 1; }
+            80% { transform: scale(4); opacity: 1; }
+            95% { transform: scale(6); opacity: 0.8; }
+            100% { transform: scale(10); opacity: 0; }
+        }
+
+        /* Kissing Chipi Animation */
+        .kissing-chipi {
+            width: 200px;
+            animation: kissApproach 2s forwards ease-in-out;
+        }
+
+        @keyframes kissApproach {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(2.5) translateY(10px); }
+        }
+
+        .heart-emoji {
+            font-size: 40px;
+            animation: popHeart 0.5s infinite alternate;
+        }
+
+        .end-text {
+            font-size: 30px;
+            color: #fff;
+            margin-top: 25px;
+            font-weight: bold;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- FIRST PAGE -->
+        <div id="first-page">
+            <!-- အသက်ဝင်အပြုံးနဲ့ Chipi (GIF) -->
+            <img src="https://media.tenor.com/yhe9to9M3fAAAAAC/chipi-chipi-chapa-chapa.gif" alt="Cute Chipi" class="chipi-img">
+            <div class="title">Hello ငယ်ချင်း</div>
+            <div class="btn-group">
+                <button class="btn btn-no" onclick="startNoHello()">No Hello</button>
+                <button class="btn btn-yes" onclick="startHello()">Hello</button>
+            </div>
+        </div>
+
+        <!-- NO HELLO PAGE -->
+        <div id="no-hello-page" class="hidden">
+            <div id="timer" class="countdown">3</div>
+            
+            <div id="impossible-section" class="hidden">
+                <div class="impossible-text">IMPOSSIBLE IMPOSSIBLE! 🎵</div>
+                <div id="poop-emoji" class="poop">💩</div>
+            </div>
+        </div>
+
+        <!-- HELLO PAGE -->
+        <div id="hello-page" class="hidden">
+            <div class="heart-emoji">💖 💋 💖</div>
+            <!-- မျက်နှာဆီ တည့်တည့်လာပြီးနမ်းမယ့် Chipi (GIF) -->
+            <img src="https://media.tenor.com/264bV6bS-x4AAAAi/cat-kiss.gif" alt="Kissing Chipi" class="kissing-chipi">
+            <div class="end-text">ပျော်ရွှင်ပါစေ ❤️<br><small style="font-size: 16px;">End</small></div>
+        </div>
+    </div>
+
+    <script>
+        // Audio synthesis for sounds
+        function playImpossibleSound() {
+            // Web Audio API သုံးပြီး Impossible သီချင်းမြည်သံ အသေးစားလုပ်ဆောင်ပေးခြင်း
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const notes = [440, 554.37, 659.25, 880];
+            notes.forEach((freq, index) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.3, ctx.currentTime + index * 0.2);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + (index + 1) * 0.2);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(ctx.currentTime + index * 0.2);
+                osc.stop(ctx.currentTime + (index + 1) * 0.2);
+            });
+        }
+
+        // No Hello Flow
+        function startNoHello() {
+            document.getElementById('first-page').classList.add('hidden');
+            document.getElementById('no-hello-page').classList.remove('hidden');
+
+            let timeLeft = 3;
+            const timerElement = document.getElementById('timer');
+
+            const countdown = setInterval(() => {
+                timeLeft--;
+                if (timeLeft > 0) {
+                    timerElement.textContent = timeLeft;
+                } else {
+                    clearInterval(countdown);
+                    timerElement.classList.add('hidden');
+                    
+                    // Show Impossible text & exploding poop
+                    document.getElementById('impossible-section').classList.remove('hidden');
+                    playImpossibleSound();
+
+                    // Poop Popping effect
+                    setTimeout(() => {
+                        document.getElementById('impossible-section').innerHTML = "<h1 style='color:white; font-size:40px;'>💥 BOOM! 💥</h1>";
+                    }, 2400);
+                }
+            }, 1000);
+        }
+
+        // Hello Flow
+        function startHello() {
+            document.getElementById('first-page').classList.add('hidden');
+            document.getElementById('hello-page').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
